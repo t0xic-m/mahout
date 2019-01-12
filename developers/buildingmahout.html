@@ -95,7 +95,7 @@
                         <a class="dropdown-item" href="/developers/issue-tracker">Issues Tracking (JIRA)</a>
                         <!-- <a class="dropdown-item" href="/developers/patch-check-list/">Patch Check List</a> going to github template -->
                         <!-- <a class="dropdown-item" href="/developers/reference/">References</a> a lot of overlap with books, talks, etc. page -->
-                        <a class="dropdown-item" href="/developers/release-notes/">Release Notes</a>
+                        <a class="dropdown-item" href="/developers/release-notes">Release Notes</a>
                         <!-- <a class="dropdown-item" href="/developers/thirdparty-dependencies/">Third Party Dependencies</a> is our site the reasonable place for this? -->
                         <!-- <a class="dropdown-item" href="/developers/version-control/">Version Control</a> -->
                         <div class="dropdown-divider"></div>
@@ -289,64 +289,96 @@ cp -r CL/ /usr/local/
 </code></pre>
 </div>
 
-<h3 id="changing-scala-version">Changing Scala Version</h3>
+<h3 id="profiles-reference">Profiles Reference</h3>
 
-<p>A convenience script for updating maven dependencies is included in <code class="highlighter-rouge">buildtools</code></p>
+<p>Apache Maven encourages users to make use of build profiles for selectively building modules.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$MAHOUT_HOME</span>/buildtools
-./change-scala-version.sh 2.11
+<p>The command</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mvn clean package
 </code></pre>
 </div>
 
-<p>Now go back to <code class="highlighter-rouge">$MAHOUT_HOME</code> and execute</p>
+<p>Is the basic build command. This default will build the following packages.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mvn clean install 
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>INFO] Apache Mahout 
+<span class="o">[</span>INFO] Mahout Core 
+<span class="o">[</span>INFO] Mahout Engine 
+<span class="o">[</span>INFO] - Mahout HDFS Support 
+<span class="o">[</span>INFO] - Mahout Spark Engine 
+<span class="o">[</span>INFO] Mahout Community 
+<span class="o">[</span>INFO] - Mahout Spark CLI Drivers 
 </code></pre>
 </div>
 
-<h3 id="the-distribution-profile">The Distribution Profile</h3>
+<p>The following profiles are available for building optional components:</p>
+<center>
+	<table>
+		<tr>
+			<th>Profile</th>
+			<th colspan="5">Description</th>
+		</tr>
+		<tr>
+			<td><code>all</code></td>
+			<td>Build all modules</td>
+		<tr>
+			<td><code>apache-release</code></td>
+			<td>Used for releasing Apache Mahout. See <a href="http://mahout.apache.org/developers/how-to-release">How To Release</a> for more information.</td>
+		</tr>
+		<tr>
+			<td><code>flink-batch</code></td>
+			<td>Build Community Engine of Mahout for Apache Flink (Batch)</td>
+		</tr>
+		<tr>
+			<td><code>h2o</code></td>
+			<td>Build Community Engine of Mahout for H2o</td>
+		</tr>
+		<tr>
+			<td><code>mahout-mr</code></td>
+			<td>Build Community maintained Mahout for Map Reduce</td>
+		<tr>
+			<td><code>viennacl</code></td>
+			<td>Build Experimental ViennaCL (GPU) BLAS Pack</td>
+		</tr>
+		<tr>
+			<td><code>viennacl-omp</code></td>
+			<td>Build Experimental ViennaCL-OpenMP (CPU) BLAS Pack</td>
+		<tr>
+		<tr>
+			<td><code>docs</code></td>
+			<td>Profile for building Java/Scala Docs</td>
+		<tr>
+			<th>Mahout Specific Option</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<td><code>skipCli</code></td>
+			<td>Skip building the command line drivers for Mahout on Apache Spark</td>
+		</tr>
+	&lt;/table&gt;
+&lt;/center&gt;
 
-<p>The distribution profile, among other things, will produce the same artifact for multiple Scala and Spark versions.</p>
+#### Example
 
-<p>Specifically, in addition to creating all of the</p>
+If you want to build Apache Mahout with ViennaCL OpenMP support but skip the command line Spark drivers you would use this 
+command to build:
 
-<p>Default Targets:</p>
-<ul>
-  <li>Spark 1.6 Bindings, Scala-2.10</li>
-  <li>Mahout-Math Scala-2.10</li>
-  <li>ViennaCL Scala-2.10*</li>
-  <li>ViennaCL-OMP Scala-2.10*</li>
-  <li>H2O Scala-2.10</li>
-</ul>
+```bash
+mvn clean package -Pviennacl-omp -DskipCli
+```
 
-<p>It will also create:</p>
-<ul>
-  <li>Spark 2.0 Bindings, Scala-2.11</li>
-  <li>Spark 2.1 Bindings, Scala-2.11</li>
-  <li>Mahout-Math Scala-2.11</li>
-  <li>ViennaCL Scala-2.11*</li>
-  <li>ViennaCL-OMP Scala-2.11*</li>
-  <li>H2O Scala-2.11</li>
-</ul>
+#### Building Java/Scala Docs
 
-<p>Note: * ViennaCLs are only created if the <code class="highlighter-rouge">viennacl</code> or <code class="highlighter-rouge">viennacl-omp</code> profiles are activated.</p>
+To build the Java/Scala docs use the maven `site` goal and the `docs` profile. 
 
-<p>By default, this phase will execute the <code class="highlighter-rouge">package</code> lifecycle goal on all built “extra” varients.</p>
+Additionally, passing the `-Ddependency.locations.enabled=false` option will skip checking the dependency location and allow a much faster build.
+  
+```bash
+mvn clean site -Pall,docs -Ddependency.locations.enabled=false
+```
 
-<p>E.g. if you were to run</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mvn clean install -Pdistribution
-</code></pre>
-</div>
 
-<p>You will <code class="highlighter-rouge">install</code> all of the “Default Targets” but only <code class="highlighter-rouge">package</code> the “Also created”.</p>
-
-<p>If you wish to <code class="highlighter-rouge">install</code> all of the above, you can set the <code class="highlighter-rouge">lifecycle.target</code> switch as follows:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mvn clean install -Pdistribution -Dlifecycle.target<span class="o">=</span>install
-</code></pre>
-</div>
-
+</tr></tr></tr></tr></tr></table></center>
 
     </div>
 
@@ -390,7 +422,7 @@ cp -r CL/ /usr/local/
 
   <footer class="footer bg-light">
     <div class="container text-center small">
-        Copyright &copy; 2014-2018 The Apache Software Foundation, Licensed under the Apache License, Version 2.0.
+        Copyright &copy; 2014-2019 The Apache Software Foundation, Licensed under the Apache License, Version 2.0.
     </div>
 </footer>
 
