@@ -252,7 +252,7 @@ warnings)</li>
 <ul>
   <li>If you are outside the US, then svn.apache.org may not resolve to the main US-based Subversion servers. (Compare the IP address you get for svn.apache.org with svn.us.apache.org to see if they are different.) This will cause problems during the release since it will create a revision and then immediately access, but, there is a replication lag of perhaps a minute to the non-US servers. To temporarily force using the US-based server, edit your equivalent of /etc/hosts and map the IP address of svn.us.apache.org to svn.apache.org.</li>
   <li>
-    <p>Create the release candidate: <code class="highlighter-rouge">mvn -Pmahout-release,apache-release release:prepare release:perform</code></p>
+    <p>Create the release candidate: <code class="highlighter-rouge">mvn -Pmahout-release,apache-release release:prepare release:perform</code>; to add credentials for source control use <code class="highlighter-rouge">mvn -Dusername=myusername -Dpassword='mypassword' -Papache-release release:prepare release:perform</code></p>
   </li>
   <li>If you have problems authenticating to svn.apache.org, try adding to the command line <code class="highlighter-rouge">-Dusername=USERNAME -Dpassword=PASSWORD</code></li>
   <li>If there is an issue first try doing:
@@ -298,29 +298,16 @@ git tag -d tagname (deletes the local tag)
 
 <ul>
   <li>Release the artifact in the Nexus Repository in the same way you closed it earlier.</li>
-  <li>Add your key to the KEYS file at http://www.apache.org/dist/mahout/<version>/</version></li>
-  <li>Copy the assemblies and their supporting files (tar.gz, zip, tar.bz2, plus .asc, .md5, .pom, .sha1 files) to the ASF mirrors at: people.apache.org:/www/www.apache.org/dist/mahout/<version>/. You should make sure the group "mahout" owns the files and that they are read only (-r--r--r-- in UNIX-speak). See [Guide To Distributing Existing Releases Through The ASF Mirrors|http://jakarta.apache.org/site/convert-to-mirror.html?Step-By-Step] and the links that are there.
-</version>    <ul>
-      <li>cd /www/www.apache.org/dist/mahout</li>
-      <li>mkdir <VERSION></VERSION></li>
-      <li>cd <VERSION></VERSION></li>
-      <li>wget -e robots=off –no-check-certificate -np -r
-https://repository.apache.org/content/groups/public/org/apache/mahout/apache-mahout-distribution/<VERSION>/</VERSION></li>
-      <li>mv
-repository.apache.org/content/groups/public/org/apache/mahout/mahout-distribution/0.8/*
-.</li>
-      <li>rm -rf repository.apache.org/</li>
-      <li>rm index.html</li>
-    </ul>
-  </li>
+  <li>Per http://www.apache.org/dev/release-publishing.html#distribution_dist move artifacts over to dist.apache.org</li>
+  <li>Get the Subversion (SVN) repo for Mahout at https://dist.apache.org/repos/dist/release/mahout</li>
+  <li>Make sure to add your key to KEYS if it’s not there already: https://dist.apache.org/repos/dist/release/mahout/KEYS</li>
+  <li>Copy the assemblies and their supporting files (tar.gz, zip, tar.bz2, plus .asc, .md5, .pom, .sha1 files) to a new directory and check in the new directory and the edited KEYS file if you changed it</li>
   <li>Wait 24 hours for release to propagate to mirrors.</li>
   <li>Clean up JIRA: Bulk close all X.Y JIRA issues.  Mark the Version
 number as being released (see Manage Versions.)  Add the next version
 (X.Y+1) if necessary.</li>
   <li>Update release version on http://mahout.apache.org/ and
-http://en.wikipedia.org/wiki/Apache_Mahout
-*
-https://cwiki.apache.org/confluence/display/MAHOUT/How+To+Update+The+Website</li>
+http://en.wikipedia.org/wiki/Apache_Mahout</li>
   <li>Send announcements to the user and developer lists.</li>
 </ul>
 
