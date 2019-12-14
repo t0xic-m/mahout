@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>
-    Apache Mahout
+    14.1 Release in the works
     
   </title>
 
-  <meta name="description" content="Distributed Linear Algebra">
+  <meta name="description" content="On wierd version numbering…">
 
   <link rel="stylesheet" href="/assets/css/main.css">
 
@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,500" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,700,700i" rel="stylesheet">
 
-  <link rel="canonical" href="http://mahout.apache.org//">
+  <link rel="canonical" href="http://mahout.apache.org//2019/12/14/version-14-1.html">
   <link rel="alternate" type="application/rss+xml" title="Apache Mahout" href="/%20/feed.xml">
 
 
@@ -162,135 +162,27 @@
 </nav>
 
 
-  <header class="mahout-header">
-  <div class="mahout-header-upper">
-    <div class="container mt-auto">
-      <div class="row">
-        <div class="col-12">
-          <img src="/assets/mahout-logo-white.svg" alt="Apache Mahout">
-          <img class="asf-logo float-right" src="/assets/asf_logo_white.svg" alt="Apache Software Foundation">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="mahout-header-lower">
-    <div class="container position-relative mb-auto">
-      <h2 class="mb-4">For Creating Scalable Performant Machine Learning Applications</h2>
-      <a class="btn btn-lg btn-light btn-download mb-3" href="https://www.apache.org/dyn/mirrors/mirrors.cgi?action=download&filename=mahout/0.14.0/mahout-0.14.0-source-release.zip"><i class="fa fa-download"></i> Download Mahout</a>
-      <div class="small text-white mx-auto">Currently v0.14.0</div>
-    </div>
-  </div>
-  <canvas id="waves"></canvas>
-</header>
-
-<div class="container mt-5 pb-4">
+  <div class="container mt-5 pb-4">
 
   <div class="row">
 
     <div class="col-lg-8">
-      <p>Apache Mahout(TM) is a <strong>distributed linear algebra framework</strong> and <strong>mathematically expressive Scala DSL</strong> designed to let mathematicians, statisticians, and data scientists quickly <em>implement their own algorithms</em>. Apache Spark is the recommended out-of-the-box distributed back-end, <em>or can be extended to other distributed backends.</em></p>
+      <h3 id="on-wierd-version-numbering">On wierd version numbering…</h3>
 
-<ul>
-  <li>Mathematically Expressive Scala DSL</li>
-  <li>Support for Multiple Distributed Backends (including Apache Spark)</li>
-  <li>Modular Native Solvers for CPU/GPU/CUDA Acceleration</li>
-</ul>
+<p>We were under pressure to release a “version above 1.0” which seemed sort of arbitrary to us.</p>
 
-<h2 class="section-heading">Recent News</h2>
+<p>We decided to just stick with our original schema, but take it x10.  Our last release was 0.14.0, and thus this release
+is 14.1.  So if you’re wondering where versions 1.0-13.0 are, that’s what happened.</p>
 
-<div class="card card-post-preview mb-4">
-  <div class="card-body">
-    <div class="row no-gutters">
-      <div class="col-3 d-none d-md-flex my-auto card-post-img">
-        
-          <img class="rounded-circle img-fluid d-flex mx-auto" src="/assets/mahout-logo-blue.svg" />
-        
-      </div>
-      <div class="col-12 col-md-9 card-post-text">
-        <div class="clearfix mb-3">
-          <ul class="list-inline float-md-left mb-md-0">
-            
-            
-          </ul>
-          <div class="float-md-right small text-muted">December 14, 2019</div>
-        </div>
-        <h3 class="card-title"><a href="/2019/12/14/version-14-1.html">14.1 Release in the works</a></h3>
-        <p>On wierd version numbering…
+<p>14.1 is a long overdue fix for us releasing binaries for to use, instead of having to build your own.  0.14.0 was us finally
+moving the old Map Reduce stuff out of the main trunk, because we haven’t been about that for quite some time.</p>
 
-</p>
-        <a href="/2019/12/14/version-14-1.html" class="btn btn-primary btn-sm">Read Post &rarr;</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card card-post-preview mb-4">
-  <div class="card-body">
-    <div class="row no-gutters">
-      <div class="col-3 d-none d-md-flex my-auto card-post-img">
-        
-          <img class="rounded-circle img-fluid d-flex mx-auto" src="/assets/mahout-logo-blue.svg" />
-        
-      </div>
-      <div class="col-12 col-md-9 card-post-text">
-        <div class="clearfix mb-3">
-          <ul class="list-inline float-md-left mb-md-0">
-            
-            
-              <li class="list-inline-item">
-                <a class="small text-uppercase" href="#">news</a>
-              </li>
-              
-            
-          </ul>
-          <div class="float-md-right small text-muted">June 18, 2018</div>
-        </div>
-        <h3 class="card-title"><a href="/news/2018/06/18/preping-014.html">Preparing for version 14.1</a></h3>
-        <p>Hey all!  We’re preparing for Mahout version 14.1.
-
-</p>
-        <a href="/news/2018/06/18/preping-014.html" class="btn btn-primary btn-sm">Read Post &rarr;</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="card card-post-preview mb-4">
-  <div class="card-body">
-    <div class="row no-gutters">
-      <div class="col-3 d-none d-md-flex my-auto card-post-img">
-        
-          <img class="rounded-circle img-fluid d-flex mx-auto" src="/assets/mahout-logo-blue.svg" />
-        
-      </div>
-      <div class="col-12 col-md-9 card-post-text">
-        <div class="clearfix mb-3">
-          <ul class="list-inline float-md-left mb-md-0">
-            
-            
-              <li class="list-inline-item">
-                <a class="small text-uppercase" href="#">news</a>
-              </li>
-              
-            
-          </ul>
-          <div class="float-md-right small text-muted">December 20, 2017</div>
-        </div>
-        <h3 class="card-title"><a href="/news/2017/12/20/new-website.html">New Website</a></h3>
-        <p>We’ve launced a new website, (a HUUUGE special thanks to David Miller from StartBootstrap.com).
-
-</p>
-        <a href="/news/2017/12/20/new-website.html" class="btn btn-primary btn-sm">Read Post &rarr;</a>
-      </div>
-    </div>
-  </div>
-</div>
-
+<p>If you would like to help us test the release candidate, send an email to <code class="highlighter-rouge">dev-subscribe@mahout.apache.org</code> and reply to the
+confimration email to join our mailing list, and happy Mahouting!</p>
 
     </div>
 
     <div class="col-lg-4">
-      <h2 class="section-heading">Sidebar Home</h2>
       <!-- Apache Software Foundation Links -->
 <div class="card mb-4">
     <div class="card-header">
