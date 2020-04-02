@@ -208,24 +208,24 @@ fi
   fi
 
   # add jars for running from the command line if we requested shell or spark CLI driver
-#  if [ "$SPARK" == "1" ]; then
-#
-#    for f in $MAHOUT_HOME/lib/mahout-hdfs-*.jar ; do
-#      CLASSPATH=${CLASSPATH}:$f;
-#    done
-#
-#    for f in $MAHOUT_HOME/lib/mahout-core-*.jar ; do
-#      CLASSPATH=${CLASSPATH}:$f;
-#    done
-#
-#    for f in $MAHOUT_HOME/lib/spark_*.jar ; do
-#      CLASSPATH=${CLASSPATH}:$f;
-#    done
-#
-#    for f in $MAHOUT_HOME/lib/spark-cli_*.jar ; do
-#       CLASSPATH=${CLASSPATH}:$f;
-#    done
-#
+  if [ "$SPARK" == "1" ]; then
+
+    for f in $MAHOUT_HOME/lib/mahout-hdfs-*.jar ; do
+      CLASSPATH=${CLASSPATH}:$f;
+    done
+
+    for f in $MAHOUT_HOME/lib/mahout-core-*.jar ; do
+      CLASSPATH=${CLASSPATH}:$f;
+    done
+
+    for f in $MAHOUT_HOME/lib/spark_*.jar ; do
+      CLASSPATH=${CLASSPATH}:$f;
+    done
+
+    for f in $MAHOUT_HOME/lib/spark-cli_*.jar ; do
+       CLASSPATH=${CLASSPATH}:$f;
+    done
+
 #    # viennacl jars- may or may not be available depending on build profile
 #    for f in $MAHOUT_HOME/viennacl/target/mahout-native-viennacl_*.jar ; do
 #          CLASSPATH=${CLASSPATH}:$f;
